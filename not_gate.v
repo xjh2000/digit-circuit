@@ -1,5 +1,5 @@
-module or_gate (input a,
+module not_gate (input a,
                 input b,
                 output wire y);
-    assign y = a | b;
+    assign y = ~a;
 endmodule //and_gate
