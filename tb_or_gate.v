@@ -1,6 +1,6 @@
 `timescale  1ns / 1ps
-`include "and_gate.v"
-module tb_and_gate();
+`include "or_gate.v"
+module tb_or_gate();
     parameter PERIOD = 10;
     reg a            = 0 ;
     reg b            = 0 ;
@@ -28,11 +28,11 @@ module tb_and_gate();
         b = 1'b1;
     end
     
-    and_gate u_and_gate (.a (a), .b (b), .y (y));
+    or_gate u_or_gate (.a (a), .b (b), .y (y));
     
     initial begin
         $dumpfile("./wave.vcd");
-        $dumpvars(0, u_and_gate);
+        $dumpvars(0, u_or_gate);
         #(PERIOD*4) $finish;
         
     end

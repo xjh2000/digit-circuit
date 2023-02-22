@@ -1,5 +1,5 @@
 $date
-	Wed Feb 22 11:47:54 2023
+	Wed Feb 22 12:36:49 2023
 $end
 $version
 	Icarus Verilog
@@ -7,8 +7,8 @@ $end
 $timescale
 	1ps
 $end
-$scope module tb_and_gate $end
-$scope module u_and_gate $end
+$scope module tb_or_gate $end
+$scope module u_or_gate $end
 $var wire 1 ! a $end
 $var wire 1 " b $end
 $var wire 1 # y $end
@@ -25,11 +25,11 @@ $dumpvars
 0!
 $end
 #10000
+1#
 1!
 #20000
 1"
 0!
 #30000
-1#
 1!
 #40000
