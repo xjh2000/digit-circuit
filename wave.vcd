@@ -1,5 +1,5 @@
 $date
-	Wed Feb 22 14:23:19 2023
+	Thu Feb 23 09:44:11 2023
 $end
 $version
 	Icarus Verilog
@@ -7,11 +7,11 @@ $end
 $timescale
 	1ps
 $end
-$scope module tb_xor_gate $end
-$scope module u_xor_gate $end
-$var wire 1 ! a $end
-$var wire 1 " b $end
-$var wire 1 # y $end
+$scope module tb_cnt $end
+$scope module u_cnt $end
+$var wire 1 ! clk $end
+$var wire 1 " rst_n $end
+$var reg 3 # y [2:0] $end
 $upscope $end
 $upscope $end
 $enddefinitions $end
@@ -20,17 +20,47 @@ $dumpall
 $end
 #0
 $dumpvars
-0#
-0"
-0!
-$end
-#10000
-1#
-1!
-#20000
+bx #
 1"
 0!
+$end
+#5000
+1!
+#10000
+0!
+#15000
+1!
+#20000
+0!
+#25000
+1!
 #30000
-0#
+0!
+#35000
 1!
 #40000
+0!
+#45000
+1!
+#50000
+0!
+#55000
+1!
+#60000
+0!
+#65000
+1!
+#70000
+0!
+#75000
+1!
+#80000
+0!
+#85000
+1!
+#90000
+0!
+#95000
+1!
+#100000
+0!
