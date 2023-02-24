@@ -1,16 +1,16 @@
 `include "p_layer.v"
 
-module p_round(input [63:0] state,        // current cipher text
-               input [79:0] keys,         // current key
-               input [4:0] round_counter, // round counter
-               output [63:0] res,         // next cipher text
-               output [79:0] r_keys);     // next round key
+module p_round(input [0:63] state,        // current cipher text
+                     input [0:79] keys,         // current key
+                     input [0:4] round_counter, // round counter
+                     output [0:63] res,         // next cipher text
+                     output [0:79] r_keys);     // next round key
 
 
-wire   [63:0] tem0;
-wire   [63:0] tem1;
+wire   [0:63] tem0;
+wire   [0:63] tem1;
 
-reg [3:0] sbox[15:0]; // s box for sBoxLayer
+reg [0:3] sbox[0:15]; // s box for sBoxLayer
 
 initial begin
     sbox[0]  = 12;  sbox[1]  = 5; sbox[2]  = 6;  sbox[3]  = 11;
@@ -20,25 +20,25 @@ initial begin
 end
 
 // add round key
-assign tem0 = state ^ keys[63:0];
+assign tem0 = state ^ keys[0:63];
 
 // sBoxLayer
 assign tem1 = {
-sbox[tem0[3:0]],sbox[tem0[7:4]],sbox[tem0[11:8]],sbox[tem0[15:12]],
-sbox[tem0[19:16]],sbox[tem0[23:20]],sbox[tem0[27:24]],sbox[tem0[31:28]],
-sbox[tem0[35:32]],sbox[tem0[39:36]],sbox[tem0[43:40]],sbox[tem0[47:44]],
-sbox[tem0[51:48]],sbox[tem0[55:52]],sbox[tem0[59:56]],sbox[tem0[63:60]]
-};
-
-// KeyExtend
-assign     r_keys = {
-sbox[keys[64:61]],keys[79:65],keys[40:0],(keys[45:41])^round_counter,keys[60:46]
+sbox[tem0[0: 3]],sbox[tem0[4: 7]],sbox[tem0[8:11]],sbox[tem0[12:15]],
+sbox[tem0[16:19]],sbox[tem0[20:23]],sbox[tem0[24:27]],sbox[tem0[28:31]],
+sbox[tem0[32:35]],sbox[tem0[36:39]],sbox[tem0[40:43]],sbox[tem0[44:47]],
+sbox[tem0[48:51]],sbox[tem0[52:55]],sbox[tem0[56:59]],sbox[tem0[60:63]]
 };
 
 // pLayer
-p_layer      u_p_layer(
+p_layer      u_pLayer(
 .state(tem1),
 .res(res)
 );
+
+// KeyExtend
+assign     r_keys = {
+sbox[keys[61:64]],keys[65:79],keys[0:40],(keys[41:45])^round_counter,keys[46:60]
+};
 
 endmodule
