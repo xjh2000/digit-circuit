@@ -18,8 +18,10 @@ module tb_p();
     end
     
     initial begin
-        state = 64'hffff_ffff_ffff_ffff;
-        keys  = 80'hffff_ffff_ffff_ffff_ffff;
+        // state = 64'hffff_ffff_ffff_ffff;
+        // keys  = 80'hffff_ffff_ffff_ffff_ffff;
+        state    = 64'h0000_0000_0000_0000;
+        keys     = 80'h0000_0000_0000_0000_0000;
     end
     
     
@@ -31,7 +33,7 @@ module tb_p();
     
     initial begin
         $dumpfile("./wave.vcd");
-        $dumpvars(0, u_p);
+        $dumpvars(0, tb_p);
         #(PERIOD*40) $finish;
     end
     
