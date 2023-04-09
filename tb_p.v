@@ -1,13 +1,14 @@
 `timescale  1ns / 1ps
-`include "p.v"
 module tb_p();
     parameter PERIOD = 10;
     reg clk;
     reg rst_n;
-    reg [63:0] state;
-    reg [79:0] keys;
+    reg start_flag;
+    reg [127:0] state;
+    reg [127:0] keys;
     reg [23:0] counter;
-    wire [63:0] result;
+    wire [127:0] result;
+    wire end_flag ;
     
     // generate colck
     initial begin
@@ -17,18 +18,24 @@ module tb_p();
             clk = ~clk;
     end
     
+    
     initial begin
-        // state = 64'hffff_ffff_ffff_ffff;
-        // keys  = 80'hffff_ffff_ffff_ffff_ffff;
-        state    = 64'h0000_0000_0000_0000;
-        keys     = 80'h0000_0000_0000_0000_0000;
+        // state                    = 64'hffff_ffff_ffff_ffff;
+        // keys                     = 80'hffff_ffff_ffff_ffff_ffff;
+        state                       = 128'h6bc1bee22e409f96e93d7e117393172a;
+        keys                        = 128'h2b7e151628aed2a6abf7158809cf4f3c;
+        #((PERIOD/2)*1)  start_flag = 1'b1;
+        #((PERIOD/2)*2)  start_flag = 1'b0;
     end
     
     
-    p u_p(
-    .result(result),
-    .state(state),
-    .keys(keys),
+    
+    aes_cipher_top u_aes(
+    .text_out(result),
+    .text_in(state),
+    .key(keys),
+    .ld(start_flag),
+    .done(end_flag),
     .clk(clk));
     
     initial begin
