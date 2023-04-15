@@ -22,20 +22,18 @@ module tb_p();
     initial begin
         // state                    = 64'hffff_ffff_ffff_ffff;
         // keys                     = 80'hffff_ffff_ffff_ffff_ffff;
-        state                       = 128'h6bc1bee22e409f96e93d7e117393172a;
-        keys                        = 128'h2b7e151628aed2a6abf7158809cf4f3c;
+        state                       = 128'h00000000000000000000000000000000;
+        keys                        = 128'h00000000000000000000000000000000;
         #((PERIOD/2)*1)  start_flag = 1'b1;
         #((PERIOD/2)*2)  start_flag = 1'b0;
     end
     
     
     
-    aes_cipher_top u_aes(
+    midori_encrypt u_midori(
     .text_out(result),
     .text_in(state),
     .key(keys),
-    .ld(start_flag),
-    .done(end_flag),
     .clk(clk));
     
     initial begin

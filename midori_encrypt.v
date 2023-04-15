@@ -15,11 +15,12 @@ module midori_encrypt(input clk,                // system clock
     
     initial begin
         cnt = 8'd0;
+        state                       = 128'h00000000000000000000000000000000;
     end
     
     always @(posedge clk) begin
-        cnt      <= (cnt ^ 8'd20)?cnt:cnt+1;
-        state    <= (cnt ^ 8'd20)?state:(cnt ^ 8'd0)?text_in^key:state_next;
+        cnt      <= (cnt ^ 8'd20)?cnt+1:cnt;
+        state    <= (cnt ^ 8'd20)?(cnt ^ 8'd0)?text_in^key:state_next:state;
         text_out <= state_s ^ key;
     end
     
